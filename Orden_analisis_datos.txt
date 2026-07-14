@@ -1,0 +1,120 @@
+### ORDEN PARA UN CORRECTO ANÁLISIS DE DATOS ### 
+
+1. Importación de librerías. 
+
+2. Lectura de base de datos o data frame. 
+
+3. Conociendo la base de datos.  
+	3.1 Visualización encabezado y cola para tener una vista previa de los datos.
+	3.2 Conocer dimensiones de la base de datos. 
+
+4. Conociendo las variables que se tratan UNA POR UNA.  
+	4.3 Conocer los nombres de las variables y sus tipos (ESTRUCTURAS). 
+	4.1 Revisar si los nombres están bien escritos o corregirlos. 
+	4.2 Ver si su tipo de dato es adecuado y que elementos tiene.
+		EL ANÁLISIS SE HACE EN ORDEN. UNA POR UNA. 
+	4.3 Ver estadísticas o en su defecto frecuencias y categorías si son variables cualitativas. Así puede 
+	verse si de casualidad hay algún error en la variable.
+	4.5 Corregir errores de sintaxis, tipado y lo que se necesite. 
+
+5. Análisis de datos faltantes
+	5.1 Verificación general por medio de gráficos y vista de la gráfico de datos en booleanos. 
+	5.2 Reemplazar los datos faltantes con las diferentes técnicas del promedio, moda
+	o si lo más adecuado es dejarlo en N/A.
+
+6. Análisis descriptivo y exploratívo de los datos. 
+	6.1 Para variables cuantitativas: Boxplot, histogramas, correlaciones, diagramas de dispersión, densidades y 
+	obviamente los estadísticos. Técnicas del análisis multivariado y univariado . 
+	6.2 Para variables cualitativas: Tabla de contingencia, tablas cruzadas, tablas de correspondencia gráficos
+	de barras, gráficos ternários, etc. Técnicas del análisis factorial de correspondencias. 
+
+7. Análisis estadístico, preguntas, relaciones, pruebas de hipótesis, regresiones, ACP. 
+
+8. Modelos. 
+-----------------------------------------------------------------------------------------------------------------
+"""### ORDEN MEJORADO PARA UN ANÁLISIS DE DATOS COMPLETO Y PROFESIONAL ###
+
+1. **Importación de librerías**
+   - Importar librerías necesarias (pandas, numpy, matplotlib, seaborn, scipy, sklearn, etc.).
+   - Configurar opciones globales (por ejemplo, pd.set_option('display.max_columns', None)).
+
+2. **Lectura y carga de datos**
+   - Leer la base desde CSV, Excel, SQL, API o Data Lake.
+   - Verificar correcta lectura (encoding, separador, tipos de datos).
+   - Asignar nombre al DataFrame principal (df) y mantener copia original (df_raw).
+
+3. **Exploración general de la base**
+   - Visualizar encabezado (.head()) y cola (.tail()).
+   - Conocer dimensiones (.shape), memoria y tipos (.info()). 
+
+4. **Análisis individual de variables**
+   - Ver nombres y corregir inconsistencias (snake_case, sin espacios, etc.).
+   - Verificar tipos de datos (object, float, int, datetime, category) y convertir si es necesario.
+   - Para cuantitativas: obtener estadísticas (.describe()), detectar valores atípicos.
+   - Para cualitativas: contar categorías (.value_counts()), revisar coherencia.
+   - Corregir errores de escritura, codificación o tipado.
+   - Si hay variables derivadas o redundantes, definir cuáles mantener, combinar o eliminar.
+   - Identificar valores únicos por variable clave (por ejemplo, df['id'].nunique()).
+     esto se basa en ver las categorías de las variables categóricas ya que si es uno solo pue son servirá. 
+     Por otro lado, para variables numéricas es útil ver la desviación estándar, ya que si es diferente de cero
+     hay variabilidad y posiblemente información útil.
+
+5. **Análisis de datos faltantes y columnas irrelevantes**
+   - Detectar (df.isnull().sum()) y visualizar (heatmap de seaborn, matriz de missingno).
+   - Analizar patrón de faltantes (aleatorio o no).
+   - Imputar con técnicas apropiadas: media, mediana, moda, interpolación o imputación por modelo.
+   - Eliminar columnas que solo hagan ruido y no sirvan para el análisis o objetivo de los datos. 
+     Normalmente columnas que son iguales para todos los registros que no genera variabilidad y 
+     por tanto tampoco genera información útil. En caso de que se tenga duda si una columna es relevante o no
+     lo mejor es dejarla y posteriormente tomar la decisión. 
+   - Documentar cada cambio.
+
+6. **Análisis de duplicados y consistencia**
+   - Buscar duplicados (df.duplicated()).
+   - Verificar integridad de llaves primarias y relaciones entre tablas si las hay.
+   - Validar coherencia lógica (por ejemplo, fecha_inicio ≤ fecha_fin).
+
+7. **Análisis descriptivo y exploratorio (EDA)**
+     Luego de haber depurado y corregido los datos
+     a) análisis de cada variable
+     b) análisis univariado con la variable a prededir. 
+   - Variables cuantitativas: histogramas, boxplots, densidades, correlaciones, dispersión.
+   - Variables cualitativas: frecuencias, tablas cruzadas, gráficos de barras.
+     c) análisis de varibles, de pares de variables con la variable a predecir. 
+   - Relaciones mixtas: promedios por categoría, gráficos de violín, swarm, etc.
+
+8. **Análisis estadístico inferencial**
+   - Pruebas de hipótesis (t-test, chi-cuadrado, ANOVA, Mann-Whitney).
+   - Regresiones lineales o logísticas básicas para analizar relaciones.
+   - Evaluación de supuestos (normalidad, homocedasticidad, independencia).
+   - ACP / AFC según tipo de variables.
+
+9. **Preparación de datos para modelado**
+   - Normalización o estandarización.
+   - Codificación de variables categóricas.
+   - Selección de variables relevantes (VIF, correlación, importancia).
+   - Separar train/test o validación cruzada.
+   - Balanceo de clases si es clasificación (SMOTE, undersampling, etc.).
+
+10. **Modelado y validación**
+    - Entrenamiento de modelos (regresión, árboles, clustering, redes, etc.).
+    - Validación mediante métricas (accuracy, R², AUC, F1-score).
+    - Cross-validation y ajuste de hiperparámetros.
+    - Interpretabilidad (importancia de variables, SHAP, etc.).
+
+11. **Comunicación y visualización de resultados**
+    - Crear dashboards, reportes o notebooks ejecutables.
+    - Contar la historia de los datos: contexto → hallazgo → implicación.
+    - Usar visualizaciones efectivas y comparativas.
+    - Documentar todo el flujo y decisiones.
+
+12. **Conclusiones y toma de decisiones**
+    - Resumir hallazgos clave.
+    - Responder las preguntas iniciales.
+    - Identificar limitaciones y próximos pasos.
+    - Proponer recomendaciones o acciones.
+
+13. **Automatización y reproducibilidad (opcional pero profesional)**
+    - Estructurar el proyecto (carpetas /data, /scripts, /notebooks, /models).
+    - Usar logging, config.yaml, control de versiones (Git).
+    - Documentar todo con README y scripts reproducibles.
