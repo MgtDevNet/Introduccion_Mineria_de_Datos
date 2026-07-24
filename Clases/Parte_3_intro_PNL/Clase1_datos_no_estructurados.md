@@ -72,15 +72,16 @@ Es una técnica fundamental en el procesamiento de lenguaje natural que se usa p
 * El orden de las palabras no importan. 
 * ¿Cuál es la probabilidad de sacar la palabra tango de la bolsa? (de un documento con la palabra tango)
 
-En el contexto de un problema de aprendizaje las palabras se tratan como dimesiones y sus valores son las frecuencias de ocurrencia. 
+En el contexto de un problema de aprendizaje las palabras se tratan como dimesiones y sus valores son las frecuencias de ocurrencia. El modelo de bolsa de palabras es directamente la representación matricial de los documentos. 
 
 ### Palabras que no ayudan
 
-* Modelos de bolsa de palabras: muchas palabras frecuentes no ayudan. 
+* Modelos de bolsa de palabras: muchas palabras frecuentes no ayudan. (El hecho de que una palabra tenga una frecuencia alta no quiere decir que sea importante o informativa)
 * Podemos remover esas palabras de la bolsa. 
 * Esos términos son llamados: **stopwords** o **palabras vacias**
 * Hay librerías con conjuntos de stopwords para cada idioma. 
  
+
 
 ## Stemming y lematización
 Es lo último que se puede usar para reducción de dimensionalidad.
@@ -131,7 +132,7 @@ identificar y clasificar expresiones que refieren a personas, organizaciones, lu
 * **Nombre propio**: Sustantivos que designan a un ser o entidad única (ej. *Tango 01*).
 * **Interjección**: Expresiones que equivalen a un enunciado exclamativo (ej. *¡hola!*, *ay*).
 
-## Otras tareasd el procesamiento del lenguaje Natural
+## Otras tareas del procesamiento del lenguaje Natural
 **Part-of-speech-tagging (etiquetado morfosintáctico)**
 
 Técnica fundamental en el PLN que consiste en asignar a cada palabra de una oración una etiqueta que indica su categoría gramatical. 
