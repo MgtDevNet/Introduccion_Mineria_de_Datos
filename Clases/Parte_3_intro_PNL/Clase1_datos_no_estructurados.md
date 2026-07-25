@@ -74,6 +74,8 @@ Es una técnica fundamental en el procesamiento de lenguaje natural que se usa p
 
 En el contexto de un problema de aprendizaje las palabras se tratan como dimesiones y sus valores son las frecuencias de ocurrencia. El modelo de bolsa de palabras es directamente la representación matricial de los documentos. 
 
+LA MATRIZ TÉRMINO-DOCUMENTO ES LO MISMO QUE LA BOLSA DE PALABRAS. 
+
 ### Palabras que no ayudan
 
 * Modelos de bolsa de palabras: muchas palabras frecuentes no ayudan. (El hecho de que una palabra tenga una frecuencia alta no quiere decir que sea importante o informativa)
