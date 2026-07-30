@@ -115,7 +115,7 @@ Aunque si se esta usando un algoritmo no paramétrico que no necesita la normali
 
 No se trata de normalizción en el sentdio de llevar a una escala específica sino másb bien llevarla a que se parezca a una distribución normal, simétrica. 
 
-### 4. Discretización
+### 4. Discretización NO supervisada
 
 * Es una técnica sencilla pero demasiado útil y es dividir el rango de una variable continua en intervalos. 
 
@@ -124,6 +124,81 @@ No se trata de normalizción en el sentdio de llevar a una escala específica si
 Ahora, ¿Como establecer estos rangos de discretización?
 
 #### 1. Discretización Binnig.
+Comienza con el conjunto de datos completo y luego divide ese rango en intervalos discretos. Se basa en una visión general de los datos y la definición de intervalos que abarcan todo el rango de valores posibles. 
+
+* Es top-down: va de 
+
+* Se basa en un número específico de cortes. 
+
+* Los criterios de agrupamiento pueden ser por: 
+    * Igual frecuencia: igual cantidad de observaciones. 
+    * Igual ancho: se definen rangos o intervalor para cada uno de los agrupamientos.
+* Se hacer el reemplazo de los datos por la **media** o la **mediana** o una **etiqueta**
+
+* **Proceso:** Primero se decide el número de intervalos o cagorías. Luego se divide el rango total de los datosa en esos intervalos. Estos intervalos pueden ser iguales en tamaño o pueden ser definidos en función de criterios específicos y cada dato se asigna al intervalo correspondiente.
+
+*No se usa información de la clase y por tanto es no supervisado. 
+
+* Es muy sencillo pero no captura bien la variabilidad y es menos flexible. 
+
+#### 2. Discretizaicón Bottom-up. 
+* Comienza con los datos individuales y luego agrupa estos datos en intervalos o categorías. Se basa en la estructura y distribución de los datos en lugar de imponer una divisón predefinida.
+
+* **Proceso:** Se analiza la distribución de los datos para identificar patrones, grupos o patrones NATURALES. A partir de esta información se definen los intervalos o categorías de manera que reflejen mejor la estructura subyacente de los dos y cada datos e agrupa enel intervalo que mejor representa su dato. 
+
+* Caputra mejor la distribución real de los datos y es muy flexible pero puede ser más complejo de implementar.
+
+![ejemplo_discretización](../imagenes/discretizaicion_ejemplo.png)
+
+#### 3. Discretización Rank
+Donde el ranking de un número es su tamaño relativo a otros valores de una variable numérica. Primero se ordena la lista de valores, luego se asigna la posición de un valor como su rango. 
+
+Los mismos valores reciben el mismo rango pero la presencia de duplicados afecta a las filas de valores posteriores.
+
+Rango es un sólido método de binnig con un inconveniente importante, los valores pueden tener rangos diferentes en diferentes listas. Y pues habrán tantos rangos como valores diferentes por lo que si hay muchos valores diferentes entonces pues sería una perdida de tiempo. 
+
+#### 4. Discretización quantiles
+También son métodos binning muy útiles pero como Rank, un valor puede tener cuantil diferente si la lista de valores cambia. 
 
 
+#### 4. Discretización con funciones matemáticas
+Por ejemplo tomar la parte entera del logaritmo de los datos, FlOOR(log(X)) es un método binning efectivo para las variables numéricas con distribución altamente sesgada como el ingreso. Y es una buena forma de etiquetar.
 
+### 5. Discretización Supervisada
+
+Ahora veremos métodos necesitan verificaciones de que los cortes que se hacen estan bien. 
+
+#### 1. Discretización basada en Entropia.
+
+La **entropía** es una medida de la incertidumbre o el desorden en un conjunto de datos. En el contexto de la teoría de la información, se usa para cuantificar la cantidad de información contenida en un conjunto de datos.
+
+**Para variables discretas**
+Para una variable discreta Y con clases $C_1$,$C_2$,$C_3$,...,$C_k$. La entropía se define como : 
+
+$$H(Y)=-\sum_{i=1}^k p(C_i)log_2p(C_i)$$
+
+Donde $P(C_i)$ es la probabilidad de la clase i.
+
+¿Por qué esa formula?
+
+**Para variables continuas**
+* La idea es discretizar en función de la entropía encontrada para encontrar los puntos de corte óptimos. Primero, se deben probar diferentes puntos de corte en el rango continuo y calcular cómo afecta la entropía. 
+
+* Para cada posible punto de corte $t$, divide el rango continuo en dos intervalos $(-\inf, t],(t,\inf)$. Luego calcula la **entropía condicional** para cada intervalo: 
+
+    * Entropía intervalo 1: $H(Y|X<=t)$
+    * Entropí intervalo 2. $H(Y|X>t)$
+
+Donde $X$ es la variable continua que se está discretizando y $Y$ la variable objetivo o respuesta. 
+
+* Calcula la entropía total después de la discretización utilizando el punto de corte $t$. Esto se hace sumando las entropías ponderadas de los intervalos resultantes
+
+$$H(Y|X \text{después de la discretización})=P(X<=t)*H(Y|X<=t) + P(X>t)*H(Y|X>t)$$
+
+donde $P(X<=t)$ y $P(X>t)$ son las proporciones de datos que caen en los intervalos.
+
+* Luego compara la entropía total calculada para cada punto de corte. El mejor punto de corte es aquel **que minimiza la entropía total** después de la discretización, lo que indica que la división proporciona mayor ganancia de información (osea, la mayor capacidad de distinguir entre diferentes clases). Como es una medida de incertidubmre, a menor incertidumbre, más explicabilidad y eso es lo que se quiere. 
+
+Nota: en el algoritmo de árboles de decisión los puentos de corte se hallan de la misma manera minimizando al entropía y maximizando la cantidad de información explicada. 
+
+min: 46:34
