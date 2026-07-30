@@ -1,6 +1,8 @@
+Clase mayo 5. 
+
 Es un hecho que hoy en día se manejan grandes volúmenes de datos, no solo referente a cantidad de registros sino también a la cantidad de variables o atributos que tienen nuestros conjuntos de datos hoy en día. 
 
-Por tanto, para tener mejores resúmenes o poder desarrollar diferentes técnias es que es se busca alcanzar un reducción de la dimensionalidad. 
+Por tanto, para tener mejores resúmenes o poder desarrollar diferentes técnicas es que es se busca alcanzar un reducción de la dimensionalidad. 
 
 ## Estrategias de reducción de datos: 
 
@@ -18,13 +20,13 @@ Por tanto, para tener mejores resúmenes o poder desarrollar diferentes técnias
     Daba cube aggregation, dicretization, etc. 
 
 ## Maldición de la dimensionalidad
-Este problema conocido como maldición de dimensionalidad es un fenómeno que ocurre cuando el el número de dimensiones en un conjunto de datos es muy grandre en comparación al número de muestras.
+Este problema conocido como maldición de dimensionalidad es un fenómeno que ocurre cuando el número de dimensiones en un conjunto de datos es muy grandre en comparación al número de muestras.
 
 * **Espacio de características disperso:** A más dimensiones, más disperso será el espacio de características; por tanto, muestras indiviuales muy separadas y dificulta la identificación de patrones significativos. 
 
 * **Dificultad de visualización.** 
 
-* **Sobreajuste y generalizción pobre**: A más dimensiones, más complejo será el modelo necesario para descrbir los datos. Esto puede conducir al sobreajuster, donde el modelo se ajusta demasiado a los datos del entrenamiento y no generaliza bien a nuevos datos.  (el objetivo de los modelos predictivos es atrapar la generalización de los datos)
+* **Sobreajuste y generalizción pobre**: A más dimensiones, más complejo será el modelo necesario para descrbir los datos. Esto puede conducir al sobreajuste, donde el modelo se ajusta demasiado a los datos del entrenamiento y no generaliza bien a nuevos datos.  (el objetivo de los modelos predictivos es atrapar la generalización de los datos)
 
 * **Costo computacional**: El procesamiento y almacenamiento de datos de alta dimensionalidad es computacionalmente costoso. Muchos algoritmos ML experimentan aumento significativo en el tiempo de ejecución a mayor número de dimensiones. 
 
@@ -42,13 +44,13 @@ Nota: Hay que recordar que siempre que se trabaje con con distintos modelos se c
 
 Nota: a pesar que se presenten distintas metologías para reducir la dimensionalidad es importante entender el negocio pues muchas veces es necesario  mantener una variable de poca variabilidad pues puede ser significativa por más poca información que tenga. 
 
-### Eliminar columnas con datos faltantes (no siempre es la mejor opción): 
+### 1. Eliminar columnas con datos faltantes (no siempre es la mejor opción): 
 * Cuando no es posible realizar imputaciones. 
 * Criterio de eliminación: Predominio de datos faltantes. 
     * Por ejemplo, atributos con menos del 5% o 10% de valores. 
 * Para todo tipo de variables. 
 
-### Low variance Filter
+### 2. Low variance Filter
 * Medir varianza de columna para saber cunta información tiene. 
 * Varianza 0 implica un valor constante y no sería de ayuda en la discriminación de diferentes grupos de datos. 
 * Con low variance filter calcula la varianza para cada uno de los atribuos y remueve aquellos que están por debajo de un umbral. 
@@ -56,7 +58,7 @@ Nota: a pesar que se presenten distintas metologías para reducir la dimensional
     * Los rangos de columna de datos deben normalizarse para que los valores de varianza sean independientes del rango del domino de la columna. 
     * Para varaibles booleanas de puede usar la Bernoulli. $var(x)=p(1-p)$
 
-### Reducción usando chi-cuadrado $\chi^2$
+### 3. Reducción usando chi-cuadrado $\chi^2$
 
 APLICA A VARIABLES CATEGÓRICAS Y NO-NEGATIVAS como booleanos o frecuencias; por tanto, las continuas se discretizan. Y el objetivo es un modelo de clasificación; es decir, v. respuesta de tipo cualitativo. 
 
@@ -74,34 +76,34 @@ V esta entre 0 y 1
 Mas cercano a 1 $\rightarrow$ mayor correlación
 
 
-### Columnas altamente correlacionadas. 
+### 4. Columnas altamente correlacionadas. 
 (colinealidad)
 * Atributos correlacionados introducen redundancia al dataset. 
 * Atributos redundantes no agregan información y tornan complejo al modelado. 
 * Se puede eliminar una de las dos columnas sin dismunuir drásticamente la cantidad de información disponible. 
-* El procedimiento consiste en la eliminación de pares correlascionados a partir de la matriz de correlaciones. 
+* El procedimiento consiste en la eliminación de pares correlacionados a partir de la matriz de correlaciones. 
 * Método para variables continuas o discretas con coeficiente de correlación de pearson y prueba de $\chi^2$ de Pearson.
 
-Algunas veces, puede suceder que se tenga que trabajar con la multicolinealidad debido a que las variables correlacionadads son importantes para el desarrollo. 
+Algunas veces, puede suceder que se tenga que trabajar con la multicolinealidad debido a que las variables correlacionadas son importantes para el desarrollo. 
 
 1. Se define un umbral de correlación. 
 2. Se seleccionan pares de valores mayores al umbral. 
 3. El criterio es conservar la variable que en el resto de las correlaciones sea en promedio menor. Que la otra
 
-### Variables importantes (Random Forest)
-Con el algoritmo de machine de random forest hay una posiblidad de ver que variables son importantes y cuales no.
+### 5. Variables importantes (Random Forest)
+Con el algoritmo de ML de random forest hay una posiblidad de ver que variables son importantes y cuales no.
 
-* Son productos derivador de la salida de un modelo de ensambre Random Forest (RF).
+* Son productos derivado de la salida de un modelo de Random Forest (RF).
 * La inducción de árboles de decisión involucra la utilización de medidas internas de importancia. 
-* RF realiza un muestreo de variables para cada árbol y mide la importancia de cada variable para esa muestra. Al finalizar calcula la importancia promedio de cada variable a aprtir de todas las muestras en las que salió seleccionada.
+* RF realiza un muestreo de variables para cada árbol y mide la importancia de cada variable para esa muestra. Al finalizar calcula la importancia promedio de cada variable a partir de todas las muestras en las que salió seleccionada.
 
 se construyen muchos árboles con muestras distintas y en cada iteración se mide la importancia a cada varible para explicar un problema en específico.
 
-Un Random forest (bosque aletorio) es un algoritmo de aprendizaje automático utilizado tanto para tareas de clasificación como de regresión. Construye múltiples árboles de decisión durante el entrenamiento y combinar sus resultados para obtener una predicción más precisa y robusta. 
+Un Random forest (bosque aletorio) es un algoritmo de aprendizaje automático utilizado tanto para tareas de clasificación como de regresión. Construye múltiples árboles de decisión durante el entrenamiento y combina sus resultados para obtener una predicción más precisa y robusta. 
 
 **Creación de árboles de decisión**: Un Random forest construye muchos árboles de decisión. Cada árbol se construye utilizando una muestra aleatoria de los datos de entrenamiento y una selección aleatoria de caractarísticas en cada nodo del árbol. Esta aleatorización ayuda a que los árboles sean menos correlacionados entre sí. 
 
-**Muestreo Bootstrap**: Para cada árbol en el bosque, se usa un conjutno de datos de entrenamiento diferente, obtenido mediante el método de muestreo bootstrap. Esto significa  que para cada árbol se selecciona aleatoriamente una muestra con reemplazo del conjunto original. 
+**Muestreo Bootstrap**: Para cada árbol en el bosque, se usa un conjunto de datos de entrenamiento diferente, obtenido mediante el método de muestreo bootstrap. Esto significa  que para cada árbol se selecciona aleatoriamente una muestra con reemplazo del conjunto original. 
 
 **Selección aleatoria de características**: en cada nodo de un árbol, solo un subconjunto aleatorio de las características se considera para la división. Esto introduce más diversidad entre los árboles y ayuda a evitar el sobreajuste. 
 
@@ -113,16 +115,22 @@ Un Random forest (bosque aletorio) es un algoritmo de aprendizaje automático ut
 ejemplo: se quiere clasificar si un cliente comprará un producto basado en su edad y el ingreso. 
 ![ejemplo](../imagenes/random_forest_ejemplo.png)
 
-RAÍZ Si la edad es menor a 30: 
+RAÍZ Si la edad es menor a 30:
+
 si: pasa al siguiente nodo.
+
 No: El cliente no compra. 
 
 NODO INTERNO Si el ingreso es 30 años o menos:
+
 Si: comprará el producto
+
 NO: No comprará el producto
 
 NODO TERMINAL:
+
 Si: comprará el producto
+
 NO: No comprará el producto
 
 La **importancia de las características** se refiere a qué tan valiosa es cada característica para hacer prediciones. Esto se calcula automáticamente en el proceso de entrenamient y se hace usando métodos basados en çomo las características afectan la calidad de las divisiones en los árboles del bosqué. 
@@ -130,11 +138,11 @@ La **importancia de las características** se refiere a qué tan valiosa es cada
 #### Importancia Basada en la Reducción de Impureza. 
 Este método es el más común y se basa en la cantidad de reducción de impureza(**o variabilidad**) que una característica propociona en los árboles de decisión Random Forest. La impureza puede ser medida por índices como **entropía en la clasificación** o la **varianza en la regresión** o el índice gini también usada en clasificación como medida de impureza. 
 
-*Reducción de Impureza en un Nodo: En cada división de un árbol de decisión, el algoritmo evalúa qué tan buena es la división en función de la reducción de impureza que produce. La importancia de una característica se calcula como la suma de las reducciones de impureza ponderadas que esa característica contribuye a través de todas las divisiones en todos los árboles del bosque. 
+* Reducción de Impureza en un Nodo: En cada división de un árbol de decisión, el algoritmo evalúa qué tan buena es la división en función de la reducción de impureza que produce. La importancia de una característica se calcula como la suma de las reducciones de impureza ponderadas que esa característica contribuye a través de todas las divisiones en todos los árboles del bosque. 
 
-*Cálculo: Para cada característica, se suman las reducciones de la impureza que la característica contribuye a lo largo de todos los nodos y árboles en el bosque. Luego, esta suma dse promedia y se normaliza para obtner la importancia relativa. 
+* Cálculo: Para cada característica, se suman las reducciones de la impureza que la característica contribuye a lo largo de todos los nodos y árboles en el bosque. Luego, esta suma dse promedia y se normaliza para obtner la importancia relativa. 
 
-### Eliminación backward, fordward y stepwise(como se vio en regesión)
+### 6. Eliminación backward, fordward y stepwise(como se vio en regesión)
 #### Backward:
 * Realiza un loop y usa un algoritmo de aprendizaje para medir cómo disminuye el error al quitar algún atributo.
 
@@ -153,8 +161,8 @@ Este método es el más común y se basa en la cantidad de reducción de impurez
 
 se hacen todas las combinaciones posibles de las variables, inluso se comienza con una sola variable  y se selecciona la de menor MSE. 
 
-### Análisis de componentes principales PCA
-* Encuentra una proyección que captura la mayor varaiblidad posible de los datos. 
+### 7. Análisis de componentes principales PCA
+* Encuentra una proyección que captura la mayor variabilidad posible de los datos. 
 
 * Los datos originales se proyectan en un espacio mucho más pequeño, lo que resulta en la reducción de dimensionalidad. 
 
@@ -174,7 +182,12 @@ Pasos:
 
 5. **Transformación de datos**: Los datos originales se proyectan sobre los componentes principales seleccionados para obtener un conjunto de datos de menor dimensión. 
 
-Hay tantos componente principales como variables, pero pues cada vez la variabilidad explicada es menos por lo que solo se escogen los de mayor variablidad; idealmente que alcancen una variabilidad acumulada almenos de un 75-80%
+Hay tantos componente principales como variables, pero pues cada vez la variabilidad explicada es menor por lo que solo se escogen los de mayor variablidad; idealmente que alcancen una variabilidad acumulada almenos de un 75-80%
 
-lo dificíl es que ahora los ejes pierden explicabilidad tanto porque se transformaron los datos, como que son una combinación de las variables que son las que se pueden explicar. 
+lo dificíl es que ahora los ejes pierden explicabilidad tanto porque se transformaron los datos, como que son una combinación de las variables que son las que se pueden explicar. Entiendase la explicabilidad como una interpretación intuitiva de la ubicación del datos según los ejes. 
+
+vease en las notas, un ejemplo visual de la reducción de dimensionalidad por PCA.
+
+Notese en el ejemplo que la metología tiene sentido, si tenemos el espacio original creado por el eje X y el eje Y con los vectores principales (1,0) y (0,1) respectivamente, todo punto en el espacio se puede representar como una combinación lienal de ellos. Ahora bien, calculando los componentes principales, hacemos una transformación y nuestro eje X y eje Y cambian. Pues ahora mis ejes son unas combinciones lineales donde los son los vectores propios que me darán la dirección de mis puntos a donde se maximiza la variblidad de los datos. 
+siguien siendo dos vectores L.I que crean ese espacio vectorial, por tanto, ahora de la misma forma que se tenían los datos en el espacio original, ahora se tienen los datos en el nuevo espacio, donde incluso su ubicación representa la varaiblidad que aporta a cada eje principal. 
 
