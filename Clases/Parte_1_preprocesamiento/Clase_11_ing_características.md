@@ -201,4 +201,40 @@ donde $P(X<=t)$ y $P(X>t)$ son las proporciones de datos que caen en los interva
 
 Nota: en el algoritmo de árboles de decisión los puentos de corte se hallan de la misma manera minimizando al entropía y maximizando la cantidad de información explicada. 
 
-min: 46:34
+* Es supervisada y separación top-down (lo que hace es que se ponene puntos de corte y se van testeando).
+
+* Explora la distribución de información en la clase para el cálculo y determinación del split-point.
+* Para un dataset D $\rightarrow$ {$A_1$,$A_1$,...,$A_N$} el método para discretizar $A$ es:
+
+1. Cada Valor de A se considera como un posbile split-point para haccer una discretización binaria. 
+
+2. Calculo la Entropía para la Clase. 
+
+$$H(S) = \sum - p_i*ln(p_ig)$$
+
+3. Calcula la **Entropía** par a la calse y el split-point a evaluar.
+
+$$H(S,A) = \sum \frac{|S_v|}{|S|}H(S_v)$$
+
+4. Cálculo **information Gain** para esta partición, como:
+
+$$InformationGain = H(S) - H(S,A) = Entropia sin hacer cortes - entropía total después del corte$$
+
+### 5. Recodificación de variables.
+
+* Algunos métodos analíticos, como la regresión, requieren que los predictores sean numéricos. 
+
+* Cuando tenemos descriptores categóricos, podemos recodificar la variable categórica en una o más variables Dummy o Flags o One-Hot enconding.
+
+### 6. Índice Gini
+
+**Es como el equivalente a la entropía para las veces cuando la varibles respuesta es numérica.** 
+
+en el contexto de árboles de decisión este índice mide la impureza de un nodo en el árbol. El objetivo es encontrar la división en los datos que minimicie el índicde de Gini, logrando así nodos más puros y homongéneos. La fórmula del índice de Gini para un nodo es : 
+
+$$G = 1- \sum_{i=1}^k p_i^2$$
+
+donde $p_i$ es la proporción de datos en el nodo que pertenecen a la case $i$. $K$ es el número total de clases. 
+
+En todos aquellos problemas de segmentaciónes es que se buscan estos tipos de corte ya que pueden ayudar de una manera significativa a la identificación de los partrones para la variable respuesta. 
+
