@@ -238,3 +238,10 @@ donde $p_i$ es la proporción de datos en el nodo que pertenecen a la case $i$. 
 
 En todos aquellos problemas de segmentaciónes es que se buscan estos tipos de corte ya que pueden ayudar de una manera significativa a la identificación de los partrones para la variable respuesta. 
 
+> NOTA A TENER EN CUENTA: 
+**Todo se basa en un método iterativo, habrán ocasiones que discretizar o hacer alguna transformación sea lo mejor y en otras ocasiones no, por ello, es necesario abarcar todas las posibles opciones y luego revisar métricas de desempeño para hacer la mejor elección**
+
+**Es importante no quedarse simplemente con el primer modelo, es importante revisar distintos modelos con diferentes técnicas y diferentes algoritmos**
+
+Todas las decisiones que se tomen deben tener una razón clara y con buenos argumentos pues no debe hacerse nada sin las razones adecuadas, por ejemplo, el número de intervalos. Es importante justificar todo no necesariamente con una base teórica pero almenos si práctica, según el contexto del proyecto. El tomar decisiones para los datos y con los datos puede tener consecuencias importantes en el mismo; por ello, no se puede tomar nada a la ligera, sino ser conscientes de todo lo que se haga por más tribial que aparente ser. Para que en caso de una auditoría o revisión del trabajo todo este argumentado de una manera exacta y precisa y que no haya ningún problema; que todo es una decisión robusta y no inventada. 
+
