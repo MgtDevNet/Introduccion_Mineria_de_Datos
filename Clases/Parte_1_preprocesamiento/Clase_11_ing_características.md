@@ -169,6 +169,7 @@ Por ejemplo tomar la parte entera del logaritmo de los datos, FlOOR(log(X)) es u
 Ahora veremos métodos necesitan verificaciones de que los cortes que se hacen estan bien. 
 
 #### 1. Discretización basada en Entropia.
+PARA CASOS DE USO DONDE LA VARIABLE RESPUESTA ES BINARIA.
 
 La **entropía** es una medida de la incertidumbre o el desorden en un conjunto de datos. En el contexto de la teoría de la información, se usa para cuantificar la cantidad de información contenida en un conjunto de datos.
 
@@ -219,6 +220,28 @@ $$H(S,A) = \sum \frac{|S_v|}{|S|}H(S_v)$$
 4. Cálculo **information Gain** para esta partición, como:
 
 $$InformationGain = H(S) - H(S,A) = Entropia sin hacer cortes - entropía total después del corte$$
+
+Nota: Una explicación a la formula de la entropía del $log_2p(C_i)$ siendo $P(C_i)$ la probabilidad de pertenecer a la categoría $i$ y esto responde a la pregunta ¿cuántas preguntas de "SÍ/NO" necesitas en promedio para adivinar el resultado?
+Según la teoría de la información la unidad fundamental de información es el bit; el bit representando la cantidad de información necesaria para elegir entre 2 opciones de igual probabilidad (como lanzar una moneda).
+
+* Para distinguir entre 2 opciones equiprobables es necesario una sola pregunta de SÍ/NO: $log_2(2)=1 bit$
+
+* Para distinguir entre 4 opciones equiprobables es necesario dos preguntas de SÍ/NO: $log_2(4)=2 bit$
+
+* Para distinguir entre 8 opciones equiprobables es necesario dos preguntas de SÍ/NO: $log_2(8)=3 bit$
+
+de 8 opciones, con 1 pregunta pasa a 4, con otra pregunta
+pasa a 2 y con la última para a la última opción. 
+
+Cuando tenemos $log_2(P(C_i))$ sabemos que $P(C_i)$ es un número entre 0 y 1.
+
+El término $\frac{1}{P(C_i)}$ representa la cantidad e alternativas teóricas que ese evento abre. Mientras mneos probable más bits nos da.
+
+$$info de un evento = log_2(\frac{1}{P(C_i)}) = -log_2(P(C_i))$$
+
+simplemente responde el número de preguntas que hay que hacer para acertar.
+
+Imagina que vas a adivinar la especie de una flor entre 4 clases ($C_1, C_2, C_3, C_4$):Caso A (Todas las clases igual de probables, $p = 1/4 = 0.25$):La sorpresa de cada una es $-\log_2(0.25) = \log_2(4) = 2$ bits.Hacen falta 2 preguntas estratégicas de SÍ/NO para saber cuál es.La entropía promedio es: $4 \times (0.25 \times 2) = \mathbf{2\text{ bits}}$.Caso B (Una clase es casi segura, $p(C_1) = 0.99$ y las demás $p \approx 0$):Casi no hay incertidumbre. La mayoría de las veces no necesitas hacer preguntas.La entropía tiende a 0 bits.
 
 ### 5. Recodificación de variables.
 
