@@ -187,24 +187,26 @@ Donde $P(C_i)$ es la probabilidad de la clase i.
 
 * Para cada posible punto de corte $t$, divide el rango continuo en dos intervalos $(-\inf, t],(t,\inf)$. Luego calcula la **entropía condicional** para cada intervalo: 
 
-    * Entropía intervalo 1: $H(Y|X<=t)$
-    * Entropí intervalo 2. $H(Y|X>t)$
+    * Entropía intervalo 1: $H(Y|X<=t)$ para los valores de X menores
+    o iguales a t. 
+    * Entropía intervalo 2. $H(Y|X>t)$ para los valores mayores a t.
 
 Donde $X$ es la variable continua que se está discretizando y $Y$ la variable objetivo o respuesta. 
 
-* Calcula la entropía total después de la discretización utilizando el punto de corte $t$. Esto se hace sumando las entropías ponderadas de los intervalos resultantes
+* Calcula la entropía total después de la discretización utilizando el punto de corte $t$ específico. Esto se hace sumando las entropías ponderadas de los intervalos resultantes
 
 $$H(Y|X \text{después de la discretización})=P(X<=t)*H(Y|X<=t) + P(X>t)*H(Y|X>t)$$
 
 donde $P(X<=t)$ y $P(X>t)$ son las proporciones de datos que caen en los intervalos.
 
-* Luego compara la entropía total calculada para cada punto de corte. El mejor punto de corte es aquel **que minimiza la entropía total** después de la discretización, lo que indica que la división proporciona mayor ganancia de información (osea, la mayor capacidad de distinguir entre diferentes clases). Como es una medida de incertidubmre, a menor incertidumbre, más explicabilidad y eso es lo que se quiere. 
+* Luego compara la entropía total calculada para cada punto de corte. El mejor punto de corte es aquel **que minimiza la entropía total** después de la discretización, lo que indica que la división proporciona mayor ganancia de información (osea, la mayor capacidad de distinguir entre diferentes clases). Como es una medida de incertidumbre, a menor incertidumbre, más explicabilidad y eso es lo que se quiere. 
 
-Nota: en el algoritmo de árboles de decisión los puentos de corte se hallan de la misma manera minimizando al entropía y maximizando la cantidad de información explicada. 
+Nota: en el algoritmo de árboles de decisión los puntos de corte se hallan de la misma manera minimizando la entropía y maximizando la cantidad de información explicada. 
 
 * Es supervisada y separación top-down (lo que hace es que se ponene puntos de corte y se van testeando).
 
 * Explora la distribución de información en la clase para el cálculo y determinación del split-point.
+
 * Para un dataset D $\rightarrow$ {$A_1$,$A_1$,...,$A_N$} el método para discretizar $A$ es:
 
 1. Cada Valor de A se considera como un posbile split-point para haccer una discretización binaria. 
